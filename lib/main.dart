@@ -1,50 +1,20 @@
 import 'package:flutter/material.dart';
 
+//start of screen imports
+import 'screens/dashboard_screen.dart';
+import 'screens/health_screen.dart';
+import 'screens/data_screen.dart';
+import 'screens/alarm_screen.dart';
+import 'screens/device_settings_screen.dart';
+import 'screens/tutorials_screen.dart';
+import 'screens/about_screen.dart';
+import 'screens/settings_screen.dart';
+//end of screen imports
+
+
 void main() {
   runApp(const MyApp());
 }
-/*
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        //appbarrr twin
-        appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: Center(
-            child: Text(
-              'Whoop Unlocked',
-              style: TextStyle(
-                color: const Color.fromARGB(255, 146, 145, 145),
-                fontSize: 28.00,
-              ),
-            ),
-          ),
-        ),
-
-
-
-        //this is the widget columbs
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: const [
-            Icon(Icons.alarm),
-            Icon(Icons.bar_chart),
-            Icon(Icons.backpack),
-          ],
-        ),
-
-
-
-      ),
-    );
-  }
-}
-*/
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -75,6 +45,17 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
   double groupAlignment = -1.0;
   bool isExtended = false;
 
+  final List<Widget> _screens = const [
+    ConcentricAnimationOnboarding(),
+    HealthScreen(),
+    DataScreen(),
+    AlarmScreen(),
+    DeviceSettingsScreen(),
+    TutorialsScreen(),
+    AboutScreen(),
+    SettingsScreen(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,7 +74,6 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
                   setState(() {
                     isExtended = !isExtended;
                   });
-                  
                 },
               ),
               selectedIndex: _selectedIndex,
@@ -121,36 +101,51 @@ class _CustomNavigationRailState extends State<CustomNavigationRail> {
                   label: Text('Dashboard'),
                 ),
                 NavigationRailDestination(
-                  icon: Badge(child: Icon(Icons.notifications_outlined)),
-                  selectedIcon: Badge(child: Icon(Icons.notifications)),
-                  label: Text('Notifications'),
+                  icon: Badge(child: Icon(Icons.heart_broken_outlined)),
+                  selectedIcon: Badge(child: Icon(Icons.heart_broken)),
+                  label: Text('Health'),
                 ),
                 NavigationRailDestination(
-                  icon: Badge(
-                    label: Text('3'),
-                    child: Icon(Icons.mail_outline),
-                  ),
-                  selectedIcon: Badge(
-                    label: Text('3'),
-                    child: Icon(Icons.mail),
-                  ),
-                  label: Text('Messages'),
+                  icon: Icon(Icons.data_array_outlined),
+                  selectedIcon: Icon(Icons.data_array),
+                  label: Text('Data'),
                 ),
                 NavigationRailDestination(
-                  icon: Icon(Icons.people_outline),
-                  selectedIcon: Icon(Icons.people),
-                  label: Text('Team'),
+                  icon: Icon(Icons.alarm_outlined),
+                  selectedIcon: Icon(Icons.alarm),
+                  label: Text('Alarm'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.watch_outlined),
+                  selectedIcon: Icon(Icons.watch),
+                  label: Text('Device Settings'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.help_outlined),
+                  selectedIcon: Icon(Icons.help),
+                  label: Text('Tutorials'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.pageview_outlined),
+                  selectedIcon: Icon(Icons.pageview),
+                  label: Text('About'),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.settings_outlined),
                   selectedIcon: Icon(Icons.settings),
-                  label: Text('Settings'),
+                  label: Text('App Settings'),
                 ),
               ],
             ),
             const VerticalDivider(thickness: 1, width: 1),
+            Expanded( //switching between screens
+              child: AnimatedSwitcher(
+                duration: const Duration(milliseconds: 250),
+                child: _screens[_selectedIndex],
+              ),
+            ),
 
-            // This is the main content.
+            
           ],
         ),
       ),
