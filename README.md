@@ -1,10 +1,20 @@
 # whoop_app
 
-A new Flutter project.
+A new Flutter project. This is a app being built to allow people to use their whoop4.0 without that expensive subscription.
 
 ## Getting Started
 
 This project is a starting point for a Flutter application.
+
+
+
+
+
+
+
+
+
+
 
 A few resources to get you started if this is your first Flutter project:
 
